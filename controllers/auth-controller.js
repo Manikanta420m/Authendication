@@ -71,11 +71,11 @@ const loginUser = async(req,res)=>{
        }
        
        const accessToken=jwt.sign({
-          userId : user._id,
-          username : user.username,
-          role : user.role
+          userId : User._id,
+          username : User.username,
+          role : User.role
        },process.env.JWT_SECRET_KEY,{
-        expiresIn : '15m'
+        expiresIn : '30m'
        });
 
        res.status(200).json({
