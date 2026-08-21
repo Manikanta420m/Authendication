@@ -21,7 +21,7 @@ const uploadImageController = async (req, res) => {
 
         await newlyUploadedImage.save();
 
-        fs.unlinkSync(req.file.path);
+        // fs.unlinkSync(req.file.path);
 
         return res.status(201).json({
             success: true,
@@ -39,6 +39,41 @@ const uploadImageController = async (req, res) => {
     }
 };
 
+const fetchImagesController = async(req,res)=>{
+  try{
+     const images = await Image.find({});
+     if(images){
+      res.status(200).json({
+        success : true,
+        data : images
+      });
+     }
+  }
+  catch(e){
+    console.log(e);
+
+        return res.status(500).json({
+            success: false,
+            message: 'Something went wrong. Try again!'
+        });
+  }
+}
+
+const deleteImageController = async(req,res)=>{
+    try{
+       
+    }
+    catch(e){
+    console.log(e);
+
+        return res.status(500).json({
+            success: false,
+            message: 'Something went wrong. Try again!'
+        });
+  }
+}
+
 module.exports = {
-    uploadImageController
+    uploadImageController,
+    fetchImagesController
 };
