@@ -5,7 +5,7 @@ const uploadToCloudnary = async(filePath)=>{
        const result = await cloudnary.uploader.upload(filePath);
        return{
         url : result.secure_url,
-        publicId : result.publicId
+        publicId : result.public_id
        };
     }
     catch(error){

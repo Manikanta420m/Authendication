@@ -1,42 +1,44 @@
-const Image = require('../model/Image');
-const {uploadToCloudnary} = require('../helpers/cloudinary-helper');
+const Image = require('../models/Image');
+const { uploadToCloudnary } = require('../helpers/cloudinary-helper');
+const fs=require('fs');
 
+const uploadImageController = async (req, res) => {
+    try {
+        if (!req.file) {
+            return res.status(400).json({
+                success: false,
+                message: 'File is required. Please upload an image.'
+            });
+        }
 
-const uploadImage = async(req,res)=>{
-   try{
-     if(!req.file){
-        res.status(400).json({
-            success : false,
-            message : 'File is required please upload an image'
+        const { url, publicId } = await uploadToCloudnary(req.file.path);
+
+        const newlyUploadedImage = new Image({
+            url,
+            publicId,
+            uploadedBy: req.userInfo.userId
         });
-     }
-    
-     const {url,publicId} = await uploadToCloudnary(req.filePath); 
-     
-     const newlyUploadedImage = new Image({
-       url,
-       publicId,
-       uploadedBy : req.userInfo.userId
-     });
 
-     await newlyUploadedImage.save();
+        await newlyUploadedImage.save();
 
-     res.status(201).json({
-        success : true,
-        message : 'Image Uploaded Successfully',
-        image : newlyUploadedImage
-     });
+        fs.unlinkSync(req.file.path);
 
-   }
-   catch(error){
-    console.log(error);
-    res.status(500).json({
-        success : false,
-        message : 'Somethong went wrong Try Again!'
-    });
-   }
-}
+        return res.status(201).json({
+            success: true,
+            message: 'Image uploaded successfully',
+            image: newlyUploadedImage
+        });
 
-module.exports={
-    uploadImage
+    } catch (error) {
+        console.log(error);
+
+        return res.status(500).json({
+            success: false,
+            message: 'Something went wrong. Try again!'
+        });
+    }
+};
+
+module.exports = {
+    uploadImageController
 };

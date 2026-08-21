@@ -14,5 +14,18 @@ const storage = multer.diskStorage({
 });
 
 const checkFileFilter = (req,file,cb)=>{
-   if(file.minetype.startsWith('image'))
+   if(file.mimetype.startsWith('image')){
+      cb(null,true);
+   }
+   else{
+      cb(new Error('This is not an Image! please upload an image'));
+   }
 }
+
+module.exports= multer({
+  storage : storage,
+  fileFilter : checkFileFilter,
+  limits : {
+   fileSize : 5*1024*1024
+  }
+});
