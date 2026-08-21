@@ -50,18 +50,18 @@ const registerUser = async(req,res)=>{
 
 const loginUser = async(req,res)=>{
     try{
-       const {username,password} = req.body();
+       const {username,password} = req.body;
 
-       const user= await user.findOne({username});
+       const User= await user.findOne({username});
 
-       if(!user){
+       if(!User){
         return res.status(400).json({
             success : false,
             message : 'Invalid userName or pass'
         })
        }
 
-       const isPasswordMatch = await bcrypt.compare(password,user.password);
+       const isPasswordMatch = await bcrypt.compare(password,User.password);
 
        if(!isPasswordMatch){
         return res.status(400).json({
