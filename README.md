@@ -26,7 +26,7 @@ A backend REST API built with **Node.js, Express.js, MongoDB, and JWT** that pro
 ### Backend
 
 - Node.js
-- Express.js
+- Express.js 
 - MongoDB
 - Mongoose
 - JWT
