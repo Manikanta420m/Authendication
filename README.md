@@ -19,7 +19,6 @@ A backend REST API built with **Node.js, Express.js, MongoDB, and JWT** that pro
 - Image Pagination
 - Image Sorting
 - RESTful API Structure
-- Environment Variable Configuration
 
 ## 🛠️ Tech Stack
 
