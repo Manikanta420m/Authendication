@@ -2,7 +2,7 @@
 
 A backend REST API built with **Node.js, Express.js, MongoDB, and JWT** that provides secure user authentication, role-based authorization, password management, and image upload functionality using **Multer and Cloudinary**.
 
-## 🚀 Features
+## 🚀 Features 
 
 - User Registration
 - User Login
