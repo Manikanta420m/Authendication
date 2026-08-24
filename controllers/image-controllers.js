@@ -1,4 +1,4 @@
-const Image = require('../models/Image');
+const Image = require('../models/image');
 const { uploadToCloudnary } = require('../helpers/cloudinary-helper');
 const fs=require('fs');
 const cloudinary = require('../config/cloudinary');
